@@ -100,7 +100,7 @@ config.disable_default_key_bindings = true
 	-- font resizing
     { key = '=', mods = 'SHIFT|CTRL', action = act.ResetFontSize },
     { key = '*', mods = 'SHIFT|CTRL', action = act.IncreaseFontSize },
-    { key = '-', mods = 'SHIFT|CTRL', action = act.DecreaseFontSize },
+    { key = '_', mods = 'SHIFT|CTRL', action = act.DecreaseFontSize },
 	-- Copy paste stuff
     { key = 'C', mods = 'SHIFT|CTRL', action = act.CopyTo 'Clipboard' },
     { key = 'U', mods = 'SHIFT|CTRL', action = act.CharSelect{ copy_on_select = true, copy_to =  'ClipboardAndPrimarySelection' } },
