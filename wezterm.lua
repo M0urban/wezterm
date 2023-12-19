@@ -3,11 +3,8 @@ local wezterm = require 'wezterm'
 local act = wezterm.action
 local config = {}
 
-wezterm.on('update-right-status', function(window, pane)
-  window:set_right_status(window:active_workspace())
-end)
 
--- Appearence settings
+-------------APPEARENCE SETTINGS------------------------------------------------
 config.font = wezterm.font {
 	family = 'JetBrains Mono',
 	weight = 'DemiBold',
@@ -16,6 +13,26 @@ config.font = wezterm.font {
 	}
 config.color_scheme = 'Monokai (terminal.sexy)'
 config.default_prog = {'C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe' }
+
+-------------WORKSPACE SETTINGS---------------------------------------------------
+--Set workspace name in the top right
+wezterm.on('update-right-status', function(window, pane)
+  window:set_right_status(window:active_workspace())
+end)
+
+local wez_config_edit = {}
+
+wez_config_edit.label = 'Open wezterm config directory'
+wez_config_edit.args = {'nvim', '.'}
+wez_config_edit.cwd = wezterm.config_dir
+wez_config_edit.domain = 'DefaultDomain'
+--todo handle case, that nvim only in wsl
+--[[ if  wezterm.target_triple == 'x86_64-pc-windows-msvc' and not string.find(os.getenv("PATH"), 'nvim') then
+  for 
+    
+  end
+end ]]
+
 
 
 config.disable_default_key_bindings = true
@@ -47,11 +64,8 @@ config.disable_default_key_bindings = true
         end),
       },
     },
-    {
-      key = '9',
-      mods = 'ALT',
-      action = act.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' },
-    },
+    { key = '8', mods = 'ALT', action = act.ShowLauncherArgs { flags = 'FUZZY|DOMAINS' }, },
+    { key = '9', mods = 'ALT', action = act.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' }, },
 	--Window related stuff
     { key = 'M', mods = 'SHIFT|CTRL', action = act.Hide },
     { key = 'N', mods = 'SHIFT|CTRL', action = act.SpawnWindow },
@@ -204,5 +218,9 @@ config.disable_default_key_bindings = true
 
   }
 
+------------LAUNCH MENU CONFIG-------------------------------------------------------------------
+config.launch_menu = {
+  wez_config_edit,
+}
 
 return config
