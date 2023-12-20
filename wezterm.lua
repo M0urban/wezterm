@@ -12,6 +12,7 @@ wezterm.on('gui-startup', function(cmd)
   local tab, pane, window = mux.spawn_window(cmd or {})
   window:gui_window():maximize()
 end)
+
 -------------APPEARENCE SETTINGS------------------------------------------------
 config.font = wezterm.font {
 	family = 'JetBrains Mono',
@@ -96,9 +97,10 @@ config.disable_default_key_bindings = true
 	--pane related stuff use shift ctrl as modifier
 	--first pane creation and closing
     { key = 'E', mods = 'SHIFT|CTRL', action = act.SplitHorizontal{ domain =  'CurrentPaneDomain' } },
-    { key = 'R', mods = 'SHIFT|CTRL', action = act.SplitVertical{ domain =  'CurrentPaneDomain' } },
+    { key = 'E', mods = 'SHIFT|ALT', action = act.SplitVertical{ domain =  'CurrentPaneDomain' } },
     { key = 'W', mods = 'SHIFT|CTRL', action = act.CloseCurrentPane {confirm = true}},
     { key = 'Z', mods = 'SHIFT|CTRL', action = act.TogglePaneZoomState },
+    { key = 'Z', mods = 'SHIFT|ALT', action = act.RotatePanes 'CounterClockwise'},
 	--pane navigation
 		--pane navigation with arrows and vim keys
     { key = 'LeftArrow', mods = 'SHIFT|CTRL', action = act.ActivatePaneDirection 'Left' },
