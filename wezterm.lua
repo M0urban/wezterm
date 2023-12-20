@@ -1,9 +1,17 @@
 local wezterm = require 'wezterm'
 -- shortcut for keymap actions
 local act = wezterm.action
+local mux = wezterm.mux
 local config = {}
 
 
+
+
+-----------STARTUP-EVENTS--------------------------------------------------------
+wezterm.on('gui-startup', function(cmd)
+  local tab, pane, window = mux.spawn_window(cmd or {})
+  window:gui_window():maximize()
+end)
 -------------APPEARENCE SETTINGS------------------------------------------------
 config.font = wezterm.font {
 	family = 'JetBrains Mono',
