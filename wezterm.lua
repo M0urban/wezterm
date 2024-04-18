@@ -136,7 +136,7 @@ config.disable_default_key_bindings = true
 	--copy mode stuff
     { key = 'X', mods = 'SHIFT|CTRL', action = act.ActivateCopyMode },
 	-- Scrolling related stuff
-    { key = 'K', mods = 'SHIFT|CTRL', action = act.ClearScrollback 'ScrollbackOnly' },
+    { key = 'Y', mods = 'SHIFT|CTRL', action = act.ClearScrollback 'ScrollbackOnly' },
     { key = 'PageUp', mods = 'SHIFT', action = act.ScrollByPage(-1) },
     { key = 'PageDown', mods = 'SHIFT', action = act.ScrollByPage(1) },
 	-- misc
