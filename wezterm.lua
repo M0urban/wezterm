@@ -39,20 +39,45 @@ end
 
 config.wsl_domains = wsl_domains,
 
--------------WORKSPACE SETTINGS---------------------------------------------------
---Set workspace name in the top right
+    -------------WORKSPACE SETTINGS---------------------------------------------------
+    --Set workspace name in the top right
 
-wezterm.on('update-right-status', function(window, pane)
-  window:set_right_status(window:active_workspace())
-end)
-
+    wezterm.on('update-right-status', function(window, pane)
+      window:set_right_status(window:active_workspace())
+    end)
+local launch_menu = {}
 local wez_config_edit = {}
-
 wez_config_edit.label = 'Open wezterm config directory'
 wez_config_edit.args = { 'nvim', '.' }
 wez_config_edit.cwd = wezterm.config_dir
 wez_config_edit.domain = 'DefaultDomain'
+table.insert(launch_menu, {
+  label = 'Open wezterm config directory',
+  args = { 'nvim', '.' },
+  cwd = wezterm.config_dir,
+  domain = 'DefaultDomain'
+})
 
+--windows specific launchs
+if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
+  table.insert(launch_menu, {
+    label = 'PowerShell',
+    args = { 'powershell.exe', '-NoLogo' },
+  })
+
+  table.insert(launch_menu, {
+    label = 'Launch WSL Ubuntu',
+    cwd = '~',
+    args = { 'wsl', '-d', 'Ubuntu (Standard)' },
+  })
+
+  table.insert(launch_menu, {
+    label = 'Launch git bash',
+    cwd = '~',
+    args = { 'C:/Program Files/Git/bin/bash.exe', '-i', '-l' },
+  })
+end
+config.launch_menu = launch_menu
 
 
 config.disable_default_key_bindings = true
@@ -154,6 +179,7 @@ config.keys = {
   { key = 'F',          mods = 'SHIFT|CTRL', action = act.Search 'CurrentSelectionOrEmptyString' },
   { key = 'l',          mods = 'CTRL',       action = act.ShowDebugOverlay },
   { key = 'P',          mods = 'SHIFT|CTRL', action = act.ActivateCommandPalette },
+  { key = 'P',          mods = 'SHIFT|ALT', action = wezterm.action.ShowLauncherArgs { flags = 'FUZZY|LAUNCH_MENU_ITEMS' } },
   { key = 'R',          mods = 'SHIFT|CTRL', action = act.ReloadConfiguration },
   { key = 'phys:Space', mods = 'SHIFT|CTRL', action = act.QuickSelect },
 }
@@ -241,8 +267,5 @@ config.key_tables = {
 
 
 ------------LAUNCH MENU CONFIG-------------------------------------------------------------------
-config.launch_menu = {
-  wez_config_edit,
-}
 
 return config
