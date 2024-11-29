@@ -64,7 +64,10 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
     label = 'PowerShell',
     args = { 'powershell.exe', '-NoLogo' },
   })
-
+  table.insert(launch_menu, {
+    label = 'PowerShellCore',
+    args = { 'pwsh.exe', '-NoLogo' },
+  })
   table.insert(launch_menu, {
     label = 'Launch WSL Ubuntu',
     cwd = '~',
