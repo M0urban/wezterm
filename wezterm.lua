@@ -37,14 +37,14 @@ for _, dom in ipairs(wsl_domains) do
   dom.default_cwd = '/home/marius'
 end
 
-config.wsl_domains = wsl_domains,
+config.wsl_domains = wsl_domains
 
-    -------------WORKSPACE SETTINGS---------------------------------------------------
-    --Set workspace name in the top right
+-------------WORKSPACE SETTINGS---------------------------------------------------
+--Set workspace name in the top right
 
-    wezterm.on('update-right-status', function(window, pane)
-      window:set_right_status(window:active_workspace())
-    end)
+wezterm.on('update-right-status', function(window, pane)
+  window:set_right_status(window:active_workspace())
+end)
 local launch_menu = {}
 local wez_config_edit = {}
 wez_config_edit.label = 'Open wezterm config directory'
