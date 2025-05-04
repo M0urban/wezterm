@@ -69,12 +69,6 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
     args = { 'pwsh.exe', '-NoLogo' },
   })
   table.insert(launch_menu, {
-    label = 'Launch WSL Ubuntu',
-    cwd = '~',
-    args = { 'wsl', '-d', 'Ubuntu (Standard)' },
-  })
-
-  table.insert(launch_menu, {
     label = 'Launch git bash',
     cwd = '~',
     args = { 'C:/Program Files/Git/bin/bash.exe', '-i', '-l' },
