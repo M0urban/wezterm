@@ -33,8 +33,8 @@ end
 
 local wsl_domains = wezterm.default_wsl_domains()
 
-for idx, dom in ipairs(wsl_domains) do
-  dom.default_cwd = '~'
+for _, dom in ipairs(wsl_domains) do
+  dom.default_cwd = '/home/marius'
 end
 
 config.wsl_domains = wsl_domains,
